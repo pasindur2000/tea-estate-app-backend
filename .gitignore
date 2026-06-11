@@ -1,0 +1,6 @@
+# Firebase / Google service account credentials
+firebase_credentials.json
+node_modules/
+.env
+dist/
+build/
