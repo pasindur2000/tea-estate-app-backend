@@ -51,8 +51,8 @@ async def list_tea_entries(estate_id: str, date_filter: str | None = None) -> li
     query = db.collection("Tea_entries").where("estateId", "==", estate_id)
     if date_filter:
         query = query.where("date", "==", date_filter)
-    docs = query.order_by("date", direction="DESCENDING").stream()
-    return [d.to_dict() for d in docs]
+    results = [d.to_dict() for d in query.stream()]
+    return sorted(results, key=lambda x: x.get("date", ""), reverse=True)
 
 
 async def update_tea_entry(entry_id: str, data: TeaEntryUpdate) -> dict | None:
